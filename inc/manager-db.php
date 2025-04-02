@@ -80,3 +80,14 @@ function getCapitale($num)
     $result = $prep->fetch();
     return $result ? $result->Name : 'Capitale inconnue';
 }
+
+function getDetails($name)
+{
+    global $pdo;
+    $query = 'SELECT * FROM Country WHERE Name = :nom;';
+    $prep = $pdo->prepare($query);
+    $prep->bindValue(':nom', $name, PDO::PARAM_INT);
+    $prep->execute();
+    $result = $prep->fetch();
+    return $result;
+}
